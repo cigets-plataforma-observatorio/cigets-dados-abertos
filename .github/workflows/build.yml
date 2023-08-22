@@ -15,8 +15,10 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           cd dados_abertos
+          rm .env
           git checkout master
           git pull
+          git checkout .
           docker compose down
-          docker compose build 
+          docker compose build --no-cache
           docker compose up --force-recreate -d
