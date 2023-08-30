@@ -6,20 +6,6 @@ volumes:
   solr_data:
 
 services:
-
-  nginx:
-    container_name: ${NGINX_CONTAINER_NAME}
-    build:
-      context: nginx/
-      dockerfile: Dockerfile
-    depends_on:
-      ckan:
-        condition: service_healthy
-    restart: always
-    ports:
-      - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
-      - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
-    
   ckan:
     container_name: ${CKAN_CONTAINER_NAME}
     build:
