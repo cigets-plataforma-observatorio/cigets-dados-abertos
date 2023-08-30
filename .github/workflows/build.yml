@@ -17,6 +17,7 @@ jobs:
           cd dados_abertos
           rm .env
           git checkout master
+          git reset --hard origin/master
           git pull
           git checkout .
           docker compose down
