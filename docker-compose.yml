@@ -24,6 +24,9 @@ services:
         condition: service_healthy
     ports:
       - "0.0.0.0:${CKAN_PORT_HOST}:${CKAN_PORT}" 
+    environment:
+      - VIRTUAL_HOST=dados.face.ufg.br
+      - LETSENCRYPT_HOST=dados.face.ufg.br
     volumes:
       - ckan_storage:/var/lib/ckan
     restart: always
