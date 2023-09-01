@@ -1,5 +1,9 @@
 version: "3"
 
+networks:
+  ckan_network:
+    external: true
+
 volumes:
   ckan_storage:
   pg_data:
