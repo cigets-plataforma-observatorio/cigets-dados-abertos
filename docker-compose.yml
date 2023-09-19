@@ -76,3 +76,16 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
+  
+  metabase:
+    container_name: ${METABASE_CONTAINER_NAME}
+    build:
+      context: metabase/
+      dockerfile: Dockerfile
+      args:
+        - TZ=${TZ}
+    image: metabase/metabase
+    restart: always
+    ports:
+      - "3000:3000"
+    
