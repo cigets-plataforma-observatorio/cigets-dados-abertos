@@ -8,8 +8,6 @@ volumes:
   ckan_storage:
   pg_data:
   solr_data:
-  metabase_db:
-  metabase_plugins:
 
 services:
   ckan:
@@ -78,19 +76,4 @@ services:
     restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
-  
-  metabase:
-    container_name: ${METABASE_CONTAINER_NAME}
-    build:
-      context: metabase/
-      dockerfile: Dockerfile
-      args:
-        - TZ=${TZ}
-    image: metabase/metabase
-    restart: always
-    volumes:
-      - metabase_plugins:/plugins
-      - metabase_db:/metabase.db
-    ports:
-      - "3000:3000"
     
