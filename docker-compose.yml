@@ -32,7 +32,7 @@ services:
       - VIRTUAL_HOST=dados.face.ufg.br
       - LETSENCRYPT_HOST=dados.face.ufg.br
     volumes:
-      - ckan_storage:/var/lib/ckan
+      - /home/wanderson/docker_volumes/ckan/var/lib/ckan:/var/lib/ckan
     restart: always
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
@@ -58,7 +58,7 @@ services:
     ports:
       - "5436:5432"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - /home/wanderson/docker_volumes/ckan/var/lib/postgresql/data:/var/lib/postgresql/data
     restart: always
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "ckan"]
@@ -67,7 +67,7 @@ services:
     container_name: ${SOLR_CONTAINER_NAME}
     image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
     volumes:
-      - solr_data:/var/solr
+      - /home/wanderson/docker_volumes/ckan/var/solr:/var/solr
     restart: always
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
