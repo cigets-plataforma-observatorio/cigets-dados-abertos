@@ -56,7 +56,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/var/lib/postgresql/data/db
     ports:
-      - "5436:5432"
+      #- "5436:5432"
     volumes:
       - /home/wanderson/docker_volumes/ckan/var/lib/postgresql/data:/var/lib/postgresql/data
     restart: always
