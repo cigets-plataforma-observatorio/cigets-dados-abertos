@@ -10,39 +10,39 @@ volumes:
   solr_data:
 
 services:
-  ckan:
-    container_name: ${CKAN_CONTAINER_NAME}
-    build:
-      context: ckan/
-      dockerfile: Dockerfile
-      args:
-        - TZ=${TZ}
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
-      solr:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    ports:
-      - "0.0.0.0:${CKAN_PORT_HOST}:${CKAN_PORT}" 
-    environment:
-      - VIRTUAL_HOST=dados.face.ufg.br
-      - LETSENCRYPT_HOST=dados.face.ufg.br
-    volumes:
-      - /home/wanderson/docker_volumes/ckan/var/lib/ckan:/var/lib/ckan
-    restart: always
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
+  #ckan:
+  #  container_name: ${CKAN_CONTAINER_NAME}
+  #  build:
+  #    context: ckan/
+  #    dockerfile: Dockerfile
+  #    args:
+  #      - TZ=${TZ}
+  #  env_file:
+  #    - .env
+  #  depends_on:
+  #    db:
+  #      condition: service_healthy
+  #    solr:
+  #      condition: service_healthy
+  #    redis:
+  #      condition: service_healthy
+  #  ports:
+  #    - "0.0.0.0:${CKAN_PORT_HOST}:${CKAN_PORT}" 
+  #  environment:
+  #    - VIRTUAL_HOST=dados.face.ufg.br
+  #    - LETSENCRYPT_HOST=dados.face.ufg.br
+  #  volumes:
+  #    - /home/wanderson/docker_volumes/ckan/var/lib/ckan:/var/lib/ckan
+  #  restart: always
+  #  healthcheck:
+  #    test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
     
-  datapusher:
-    container_name: ${DATAPUSHER_CONTAINER_NAME}
-    image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION}
-    restart: always
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8800"]
+  #datapusher:
+  #  container_name: ${DATAPUSHER_CONTAINER_NAME}
+  #  image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION}
+  #  restart: always
+  #  healthcheck:
+  #    test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8800"]
 
   db:
     container_name: ${POSTGRESQL_CONTAINER_NAME}
@@ -58,24 +58,24 @@ services:
     ports:
       - "5436:5432"
     volumes:
-      - /home/wanderson/docker_volumes/ckan/var/lib/postgresql/data:/var/lib/postgresql/data
+      - /mnt/c/repositories/ufg/cigets-dados-abertos/volumes:/var/lib/postgresql/data
     restart: always
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "ckan"]
      
-  solr:
-    container_name: ${SOLR_CONTAINER_NAME}
-    image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
-    volumes:
-      - /home/wanderson/docker_volumes/ckan/var/solr:/var/solr
-    restart: always
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
+  #solr:
+  #  container_name: ${SOLR_CONTAINER_NAME}
+  #  image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
+  #  volumes:
+  #    - /mnt/c/repositories/ufg/cigets-dados-abertos/volumes:/var/solr
+  #  restart: always
+  #  healthcheck:
+  #    test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
 
-  redis:
-    container_name: ${REDIS_CONTAINER_NAME}
-    image: redis:${REDIS_VERSION}
-    restart: always
-    healthcheck:
-      test: ["CMD", "redis-cli", "-e", "QUIT"]
+  #redis:
+  #  container_name: ${REDIS_CONTAINER_NAME}
+  #  image: redis:${REDIS_VERSION}
+  #  restart: always
+  #  healthcheck:
+  #    test: ["CMD", "redis-cli", "-e", "QUIT"]
     
