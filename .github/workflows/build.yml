@@ -24,3 +24,4 @@ jobs:
           docker compose build --no-cache
           docker compose up --force-recreate -d
           docker ps -a
+          docker exec -it ckan paster --plugin=ckan search-index rebuild -c /etc/ckan/default/production.ini
