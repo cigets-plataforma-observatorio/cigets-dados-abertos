@@ -58,7 +58,7 @@ services:
     ports:
       - "5436:5432"
     volumes:
-      - /mnt/c/repositories/ufg/cigets-dados-abertos/volumes:/var/lib/postgresql/data
+      - /home/wanderson/docker_volumes/ckan/var/lib/postgresql/data:/var/lib/postgresql/data
     restart: always
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "ckan"]
@@ -67,7 +67,7 @@ services:
     container_name: ${SOLR_CONTAINER_NAME}
     image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
     volumes:
-      - /mnt/c/repositories/ufg/cigets-dados-abertos/volumes:/var/solr
+      - /home/wanderson/docker_volumes/ckan/var/solr:/var/solr
     restart: always
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
